@@ -1,6 +1,6 @@
 import java.io._
 import com.drew.imaging._
-import scala.collections.JavaConversions._
+import scala.collection.JavaConversions._
 
 object Exif {
 
@@ -13,7 +13,7 @@ object Exif {
     yield (t.getTagName -> t.toString())
   }
  
-  def main(args: String) = {
+  def main(args: List[String]) = {
     val f = new File(args(0))
     val ret = convert(f)
     println(ret.mkString(","))
