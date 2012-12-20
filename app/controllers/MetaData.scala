@@ -3,11 +3,12 @@ import java.io._
 import com.drew.imaging._
 import scala.collection.JavaConversions._
 import java.net._
-import play.api.lib.json._
+import play.api.libs.json._
 
 object MetaData {
   def convertUrl(urlstr: String) = {
-    val conn = new URL(urlstr) openConnection
+    val conn = new URL(urlstr)
+    conn.openConnection
     val strm = new BufferedInputStream(conn.openStream())
     val metadata = ImageMetadataReader.readMetadata(strm, true)
     println("Number of directories" + metadata.getDirectories().toList)
@@ -16,6 +17,6 @@ object MetaData {
       t <- d.getTags
     }
     yield (t.getTagName -> t.toString())
-    Json.toJson(lst)
+    Json.toJson(lst.toMap)
   }
 }
